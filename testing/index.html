@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>GlitchPic X</title>
+		<script src="js/jquery-1.8.2.js"></script>
+		<script src="js/jquery-ui-1.9.1.custom.min.js"></script>
+		<script src="js/file.js"></script>
+		<link href="css/smoothness/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="title">
+			<img src="titleglitch.jpg" alt="GlitchPic" />
+		</div>
+		<div class="wrap">
+			<div id="inpootisbox" class="uibox ui-widget-content">
+				<form>
+					<div class="fileinputs">
+						<input type="file" id="input" name="inpootis" style="margin-left: 30px"/>
+					</div>
+				</form>
+				<div class="sliderwrap">
+					<div class="sliders">
+						<!-- <div class="slider s1"></div> <div class="addslider"></div> -->
+					</div>
+				</div>
+				<div class="addslider"></div> <div class="removeslider"></div><br>
+				<input id="glitch" type="button" style="font-size: 16px; margin-top: 10px" value="Glitch"/>
+			</div>
+			<div id="outpootisbox"></div>
+		</div>
+		<script src="js/glitch.js"></script>
+		<script src="js/scramblethis.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				sliderindex = 0;
+				sliderlist = new Array()
+				$("#glitch").button();
+				$(".slider").slider();
+				$(".addslider").button({
+					text: false,
+					icons: {
+						primary: "ui-icon-plusthick"
+					}
+				})
+				$(".removeslider").button({
+					text: false,
+					icons: {
+						primary: "ui-icon-minusthick"
+					}
+				})
+				//initFileUploads();
+			});
+
+			$(".addslider").click(function() {
+				sliderlist[sliderindex] = $("<div/>", {
+					class: "slider s" + sliderindex,
+				}).appendTo(".sliders")
+
+				$(".s" + sliderindex).slider();
+				sliderindex += 1
+			})
+
+			$(".removeslider").click(function() {
+				$(".slider:last").remove();
+				sliderindex -= 1
+			})
+
+			$("#input").change(function(){
+				
+			})
+
+			$("#glitch").click(function() {
+				var values = new Array();
+				pic = imgUtil.imagify(document.getElementById("input").files[0]);
+				for (var i=0; i < sliderindex; i++)
+				{
+					values[i] = $(".s"+ i).slider("option", "value") * .01
+				}
+				//values[0] = $(".s1").slider("option", "value") * .01
+				//values[1] = $(".s2").slider("option", "value") * .01
+				//values[2] = $(".s3").slider("option", "value") * .01
+				pic = imgUtil.scramble(pic, values)
+				pic.display(document.getElementById("outpootisbox"));
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>GlitchPic X</title>
+		<script src="js/jquery-1.8.2.js"></script>
+		<script src="js/jquery-ui-1.9.1.custom.min.js"></script>
+		<script src="js/file.js"></script>
+		<link href="css/smoothness/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="title">
+			<img src="titleglitch.jpg" alt="GlitchPic" />
+		</div>
+		<div id="inpootisbox" class="ui-widget-content">
+			<form>
+				<div class="fileinputs">
+					<input type="file" id="input" name="inpootis" style="margin-left: 30px"/>
+				</div>
+			</form>
+			<div class="sliders">
+				<div class="slider s1"></div>
+				<div class="slider s2"></div>
+				<div class="slider s3"></div>
+			</div>
+			<input id="glitch" type="button" style="font-size: 16px; margin-top: 10px" value="Glitch"/>
+		</div>
+		<div id="outpootisbox"></div>
+		<script src="js/glitch.js"></script>
+		<script src="js/scramblethis.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#glitch").button();
+				$(".slider").slider();
+				//initFileUploads();
+			});
+			$("#glitch").click(function() {
+				pic = imgUtil.imagify(document.getElementById("input").files[0]);
+				var values = new Array()
+				values[0] = $(".s1").slider("option", "value") * .01
+				values[1] = $(".s2").slider("option", "value") * .01
+				values[2] = $(".s3").slider("option", "value") * .01
+				pic = imgUtil.scramble(pic, values)
+				pic.display(document.getElementById("outpootisbox"));
+			});
+		</script>
+	</body>
+</html>

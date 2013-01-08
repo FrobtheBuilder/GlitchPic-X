@@ -1,0 +1,28 @@
+body {
+}
+
+#inpootisbox
+{
+	margin: auto;
+	margin-top: 45px;
+	width: 300px;
+	padding: 20px;
+}
+
+#outpootisbox
+{
+	margin: auto;
+	width: auto;
+	padding: 20px;
+}
+
+#title img
+{
+	display: block;
+	margin: auto;
+}
+
+.slider
+{
+	margin-top: 10px;
+}
