@@ -14,34 +14,74 @@
 		<div id="title">
 			<img src="titleglitch.jpg" alt="GlitchPic" />
 		</div>
-		<div id="inpootisbox" class="ui-widget-content">
-			<form>
-				<div class="fileinputs">
-					<input type="file" id="input" name="inpootis" style="margin-left: 30px"/>
+		<div class="wrap">
+			<div id="inpootisbox" class="uibox ui-widget-content">
+				<form>
+					<div class="fileinputs">
+						<input type="file" id="input" name="inpootis" style="margin-left: 30px"/>
+					</div>
+				</form>
+				<div class="sliderwrap">
+					<div class="sliders">
+						<!-- <div class="slider s1"></div> <div class="addslider"></div> -->
+					</div>
 				</div>
-			</form>
-			<div class="sliders">
-				<div class="slider s1"></div>
-				<div class="slider s2"></div>
-				<div class="slider s3"></div>
+				<div class="addslider"></div> <div class="removeslider"></div><br>
+				<input id="glitch" type="button" style="font-size: 16px; margin-top: 10px" value="Glitch"/>
 			</div>
-			<input id="glitch" type="button" style="font-size: 16px; margin-top: 10px" value="Glitch"/>
+			<div id="outpootisbox"></div>
 		</div>
-		<div id="outpootisbox"></div>
 		<script src="js/glitch.js"></script>
 		<script src="js/scramblethis.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				sliderindex = 0;
+				sliderlist = new Array()
 				$("#glitch").button();
 				$(".slider").slider();
+				$(".addslider").button({
+					text: false,
+					icons: {
+						primary: "ui-icon-plusthick"
+					}
+				})
+				$(".removeslider").button({
+					text: false,
+					icons: {
+						primary: "ui-icon-minusthick"
+					}
+				})
 				//initFileUploads();
 			});
+
+			$(".addslider").click(function() {
+				sliderlist[sliderindex] = $("<div/>", {
+					class: "slider s" + sliderindex,
+				}).appendTo(".sliders")
+
+				$(".s" + sliderindex).slider();
+				sliderindex += 1
+			})
+
+			$(".removeslider").click(function() {
+				$(".slider:last").remove();
+				sliderindex -= 1
+			})
+
+			$("#input").change(function(){
+				
+			})
+
 			$("#glitch").click(function() {
+				var values = new Array();
 				pic = imgUtil.imagify(document.getElementById("input").files[0]);
-				var values = new Array()
-				values[0] = $(".s1").slider("option", "value") * .01
-				values[1] = $(".s2").slider("option", "value") * .01
-				values[2] = $(".s3").slider("option", "value") * .01
+				for (var i=0; i < sliderindex; i++)
+				{
+					values[i] = $(".s"+ i).slider("option", "value") * .01
+				}
+				//values[0] = $(".s1").slider("option", "value") * .01
+				//values[1] = $(".s2").slider("option", "value") * .01
+				//values[2] = $(".s3").slider("option", "value") * .01
 				pic = imgUtil.scramble(pic, values)
 				pic.display(document.getElementById("outpootisbox"));
 			});

@@ -1,19 +1,31 @@
 body {
 }
 
-#inpootisbox
+.wrap
 {
+	width: 800px;
 	margin: auto;
 	margin-top: 45px;
+}
+
+#inpootisbox
+{
+	
 	width: 300px;
 	padding: 20px;
 }
 
 #outpootisbox
 {
-	margin: auto;
+	#margin: auto;
+	float: right;
 	width: auto;
-	padding: 20px;
+}
+
+.uibox
+{
+	float: left;
+	margin-left: 20px;
 }
 
 #title img
@@ -22,7 +34,21 @@ body {
 	margin: auto;
 }
 
+.sliderwrap
+{
+	max-height: 300px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	overflow: auto;
+}
+
 .slider
+{
+	margin-top: 10px;
+}
+
+.addslider
 {
 	margin-top: 10px;
 }
